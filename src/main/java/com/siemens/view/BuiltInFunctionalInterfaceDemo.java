@@ -6,6 +6,7 @@ import com.siemens.model.Individual;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.siemens.view.IndividualComparatorDemo.generateAddresses;
@@ -26,8 +27,15 @@ public class BuiltInFunctionalInterfaceDemo {
                 .dateOfBirth(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
                 .build();
 
+        // Function
         Function<Individual, LocalDate> function = (Individual::getDateOfBirth);
 
         System.out.println("Date Of Birth: " + function.apply(individual));
+
+        BiFunction<Individual, String, Boolean> function2 = ((obj, str) ->
+                obj.getPassword().equals(str));
+
+        System.out.println("Password matches: " + function2.apply(individual, individual.getPassword()));
+        System.out.println("Password matches: " + function2.apply(individual, ""));
     }
 }
