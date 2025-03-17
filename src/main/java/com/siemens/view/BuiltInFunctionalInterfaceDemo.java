@@ -8,10 +8,7 @@ import com.siemens.model.Individual;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 import static com.siemens.view.IndividualComparatorDemo.generateAddresses;
 import static com.siemens.view.IndividualComparatorDemo.generateRandomGender;
@@ -66,5 +63,9 @@ public class BuiltInFunctionalInterfaceDemo {
 
         consumer.accept(IndividualComparatorDemo.generateIndividuals().subList(0, 10));
 
+        // Predicate
+        Predicate<Individual> individualPredicate = (obj) -> obj.getDateOfBirth().isBefore(LocalDate.now());
+
+        System.out.println("Is DOB before current date: " + individualPredicate.test(individual));
     }
 }
