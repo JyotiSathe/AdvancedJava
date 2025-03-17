@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class IndividualComparatorDemo {
+public class ComparatorDemo {
 
     public static void main(String[] args) {
 

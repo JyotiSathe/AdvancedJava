@@ -10,8 +10,8 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.function.*;
 
-import static com.siemens.view.IndividualComparatorDemo.generateAddresses;
-import static com.siemens.view.IndividualComparatorDemo.generateRandomGender;
+import static com.siemens.view.ComparatorDemo.generateAddresses;
+import static com.siemens.view.ComparatorDemo.generateRandomGender;
 
 public class BuiltInFunctionalInterfaceDemo {
 
@@ -61,7 +61,7 @@ public class BuiltInFunctionalInterfaceDemo {
             }
         };
 
-        consumer.accept(IndividualComparatorDemo.generateIndividuals().subList(0, 10));
+        consumer.accept(ComparatorDemo.generateIndividuals().subList(0, 10));
 
         // Predicate
         Predicate<Individual> individualPredicate = (obj) -> obj.getDateOfBirth().isBefore(LocalDate.now());
