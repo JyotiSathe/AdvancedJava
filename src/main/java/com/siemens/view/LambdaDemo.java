@@ -1,4 +1,4 @@
-package com.siemens;
+package com.siemens.view;
 
 import com.github.javafaker.Faker;
 import com.siemens.facade.DataGenerator;
