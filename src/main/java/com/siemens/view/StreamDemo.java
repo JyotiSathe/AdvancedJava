@@ -1,15 +1,11 @@
 package com.siemens.view;
 
+import com.github.javafaker.Faker;
 import com.siemens.dto.IndividualDTO;
-import com.siemens.model.FullName;
-import com.siemens.model.Gender;
-import com.siemens.model.Individual;
+import com.siemens.model.*;
 
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamDemo {
@@ -94,5 +90,45 @@ public class StreamDemo {
                 .skip(5)
                 .map(i -> new IndividualDTO(i.getFullName(), i.getDateOfBirth()))
                 .forEach(System.out::println);
+
+        // flatten the list
+        System.out.println();
+        List<Developer> developers = getDevelopers();
+
+        List<Skill> skills = developers.stream()
+                .map(Developer::getSkills)
+                .flatMap(List::stream)
+                .distinct()
+                .toList();
+
+        skills.forEach(System.out::println);
+    }
+
+    public static List<Developer> getDevelopers() {
+        List<Developer> developers = new ArrayList<>();
+        Developer developer;
+        Faker faker = new Faker();
+        for (int i = 0; i < 10; i++) {
+            developer = new Developer();
+            developer.setName(faker.name().firstName());
+            developer.setSkills(getSkills());
+            developers.add(developer);
+        }
+
+        return developers;
+    }
+
+    public static List<Skill> getSkills() {
+        List<Skill> skills = new ArrayList<>();
+
+        for (int i = 0; i < new Random().nextInt(2, 5); i++) {
+            skills.add(generateRandomSkills());
+        }
+        return skills;
+    }
+
+    public static Skill generateRandomSkills() {
+        Skill[] values = Skill.values();
+        return values[(int) (Math.random() * values.length)];
     }
 }
