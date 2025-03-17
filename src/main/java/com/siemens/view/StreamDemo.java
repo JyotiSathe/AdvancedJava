@@ -1,7 +1,9 @@
 package com.siemens.view;
 
+import com.siemens.dto.IndividualDTO;
 import com.siemens.model.Individual;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class StreamDemo {
@@ -18,5 +20,13 @@ public class StreamDemo {
         System.out.println("Number of people born in/before 1994: " + individuals.stream()
                 .filter(individual -> individual.getDateOfBirth().getYear() <= 1994)
                 .count());
+
+        // sorting
+        individuals.stream()
+                .filter(individual -> individual.getDateOfBirth().getYear() < 2000)
+                .sorted(Comparator.comparing(Individual::getDateOfBirth))
+                .map(i -> new IndividualDTO(i.getFullName().getFirstName(), i.getDateOfBirth()))
+//                .map(individual -> String.format("Name: %s, DateOfBirth: %s", individual.getFullName(), individual.getDateOfBirth()))
+                .forEach(System.out::println);
     }
 }
