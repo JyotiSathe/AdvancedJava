@@ -2,6 +2,7 @@ package com.siemens.view;
 
 import com.siemens.dto.IndividualDTO;
 import com.siemens.model.FullName;
+import com.siemens.model.Gender;
 import com.siemens.model.Individual;
 
 import java.time.LocalDate;
@@ -38,5 +39,12 @@ public class StreamDemo {
                 .collect(Collectors.toMap(Individual::getFullName, Individual::getDateOfBirth));
 
         map.forEach((key, value) -> System.out.println(key + " " + value));
+
+        // count how many male, female and others
+        // grouping
+        Map<Gender, Long> groupingMap = individuals.stream()
+                .collect(Collectors.groupingBy(Individual::getGender, Collectors.counting()));
+
+        groupingMap.forEach((key, value) -> System.out.println(key + " " + value));
     }
 }
