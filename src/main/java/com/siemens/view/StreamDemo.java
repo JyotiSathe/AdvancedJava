@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class StreamDemo {
 
     public static void main(String[] args) {
-        List<Individual> individuals = ComparatorDemo.generateIndividuals().subList(0, 20);
+        List<Individual> individuals = ComparatorDemo.generateIndividuals().subList(0, 50);
 
         individuals.stream()
                 .filter(individual -> individual.getDateOfBirth().getYear() < 2000)
@@ -79,5 +79,20 @@ public class StreamDemo {
                 .orElseThrow(() -> new RuntimeException("No Records for findAny."));
 
         System.out.println(object);
+
+        System.out.println();
+        // limit
+        individuals.stream()
+                .filter(i -> i.getDateOfBirth().getYear() < 1994)
+                .limit(10)
+                .map(i -> new IndividualDTO(i.getFullName(), i.getDateOfBirth()))
+                .forEach(System.out::println);
+
+        // skip
+        individuals.stream()
+                .filter(i -> i.getDateOfBirth().getYear() < 1994)
+                .skip(5)
+                .map(i -> new IndividualDTO(i.getFullName(), i.getDateOfBirth()))
+                .forEach(System.out::println);
     }
 }
