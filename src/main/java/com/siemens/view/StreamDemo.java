@@ -1,10 +1,14 @@
 package com.siemens.view;
 
 import com.siemens.dto.IndividualDTO;
+import com.siemens.model.FullName;
 import com.siemens.model.Individual;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamDemo {
 
@@ -25,8 +29,14 @@ public class StreamDemo {
         individuals.stream()
                 .filter(individual -> individual.getDateOfBirth().getYear() < 2000)
                 .sorted(Comparator.comparing(Individual::getDateOfBirth))
-                .map(i -> new IndividualDTO(i.getFullName().getFirstName(), i.getDateOfBirth()))
+                .map(i -> new IndividualDTO(i.getFullName(), i.getDateOfBirth()))
 //                .map(individual -> String.format("Name: %s, DateOfBirth: %s", individual.getFullName(), individual.getDateOfBirth()))
                 .forEach(System.out::println);
+
+        Map<FullName, LocalDate> map = individuals.stream()
+                .filter(individual -> individual.getDateOfBirth().getYear() < 2000)
+                .collect(Collectors.toMap(Individual::getFullName, Individual::getDateOfBirth));
+
+        map.forEach((key, value) -> System.out.println(key + " " + value));
     }
 }
