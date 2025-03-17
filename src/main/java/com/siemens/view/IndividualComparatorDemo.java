@@ -14,14 +14,20 @@ import java.util.List;
 public class IndividualComparatorDemo {
 
     public static void main(String[] args) {
-        for (Individual individual : generateIndividuals()) {
+
+        Comparator<Individual> comparator= Comparator.comparing(o -> o.getFullName().getFirstName());
+
+        List<Individual> individuals = generateIndividuals();
+        individuals.sort(comparator);
+
+        for (Individual individual : individuals) {
             System.out.println(individual);
         }
     }
 
     public static List<Individual> generateIndividuals() {
         List<Individual> individuals = new ArrayList<>();
-        Individual individual = null;
+        Individual individual;
         Faker faker = new Faker();
         for (int i = 0; i < 100; i++) {
             individual = Individual.builder()
