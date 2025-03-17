@@ -1,13 +1,17 @@
 package com.siemens.view;
 
 import com.github.javafaker.Faker;
+import com.siemens.facade.DataGenerator;
 import com.siemens.model.FullName;
 import com.siemens.model.Individual;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static com.siemens.view.IndividualComparatorDemo.generateAddresses;
 import static com.siemens.view.IndividualComparatorDemo.generateRandomGender;
@@ -37,5 +41,30 @@ public class BuiltInFunctionalInterfaceDemo {
 
         System.out.println("Password matches: " + function2.apply(individual, individual.getPassword()));
         System.out.println("Password matches: " + function2.apply(individual, ""));
+
+        // Supplier with constructor reference
+        // does not take input but produces the output
+
+        Supplier<Individual> individualSupplier = Individual::new;
+
+        Individual individualObj = individualSupplier.get();
+
+        individualObj.setAccountNumber(faker.number().numberBetween(10000, 1000000));
+        System.out.println(individualObj.getAccountNumber());
+
+        // Supplier method reference
+        Supplier<String> supplier = DataGenerator::getName;
+        System.out.println(supplier.get());
+
+        // Consumer
+        // Accepts input returns nothing
+        Consumer<List<Individual>> consumer = (list) -> {
+            for (Individual individualData : list) {
+                System.out.println(individualData);
+            }
+        };
+
+        consumer.accept(IndividualComparatorDemo.generateIndividuals());
+
     }
 }
