@@ -1,0 +1,14 @@
+com\siemens\model\Customer.class
+com\siemens\model\Customer$CustomerBuilder.class
+com\siemens\model\CompanyType.class
+com\siemens\model\Customer$CustomerBuilderImpl.class
+com\siemens\model\Individual.class
+com\siemens\model\FullName.class
+com\siemens\model\Corporate$CorporateBuilder.class
+com\siemens\model\Individual$IndividualBuilderImpl.class
+com\siemens\model\Gender.class
+com\siemens\model\Individual$IndividualBuilder.class
+com\siemens\model\Corporate$CorporateBuilderImpl.class
+com\siemens\model\Address.class
+com\siemens\Main.class
+com\siemens\model\Corporate.class
