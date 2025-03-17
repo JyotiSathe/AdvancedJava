@@ -46,5 +46,12 @@ public class StreamDemo {
                 .collect(Collectors.groupingBy(Individual::getGender, Collectors.counting()));
 
         groupingMap.forEach((key, value) -> System.out.println(key + " " + value));
+
+        // allMatch
+        System.out.println(individuals.stream().allMatch(i -> i.getFullName().getFirstName().startsWith("A")));
+
+        // anyMatch
+        System.out.println(individuals.stream().anyMatch(i -> i.getFullName().getFirstName().startsWith("A")));
+
     }
 }
