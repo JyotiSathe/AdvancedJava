@@ -73,14 +73,11 @@ public class StreamDemo {
 
         // findAny
         System.out.println();
-        Optional<Individual> findAnyOptional = individuals.stream()
+        Individual object = individuals.stream()
                 .filter(i -> i.getDateOfBirth().getYear() == 1994)
-                .findAny();
+                .findAny()
+                .orElseThrow(() -> new RuntimeException("No Records for findAny."));
 
-        if (findAnyOptional.isPresent()) {
-            System.out.println(findAnyOptional.get());
-        } else {
-            System.out.println("No Records for findAny.");
-        }
+        System.out.println(object);
     }
 }
