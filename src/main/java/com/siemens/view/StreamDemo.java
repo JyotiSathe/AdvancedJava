@@ -9,12 +9,13 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StreamDemo {
 
     public static void main(String[] args) {
-        List<Individual> individuals = ComparatorDemo.generateIndividuals().subList(0,20);
+        List<Individual> individuals = ComparatorDemo.generateIndividuals().subList(0, 20);
 
         individuals.stream()
                 .filter(individual -> individual.getDateOfBirth().getYear() < 2000)
@@ -58,5 +59,28 @@ public class StreamDemo {
         // anyMatch
         System.out.println(individuals.stream().anyMatch(i -> i.getFullName().getFirstName().startsWith("A")));
 
+        // findFirst
+        System.out.println();
+        Optional<Individual> individualOptional = individuals.stream()
+                .filter(i -> i.getDateOfBirth().getYear() == 1994)
+                .findFirst();
+
+        if (individualOptional.isPresent()) {
+            System.out.println(individualOptional.get());
+        } else {
+            System.out.println("No Records for findFirst.");
+        }
+
+        // findAny
+        System.out.println();
+        Optional<Individual> findAnyOptional = individuals.stream()
+                .filter(i -> i.getDateOfBirth().getYear() == 1994)
+                .findAny();
+
+        if (findAnyOptional.isPresent()) {
+            System.out.println(findAnyOptional.get());
+        } else {
+            System.out.println("No Records for findAny.");
+        }
     }
 }
