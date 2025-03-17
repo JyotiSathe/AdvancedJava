@@ -26,7 +26,7 @@ public class BuiltInFunctionalInterfaceDemo {
                 .dateOfBirth(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
                 .build();
 
-        Function<Individual, LocalDate> function = (obj -> obj.getDateOfBirth());
+        Function<Individual, LocalDate> function = (Individual::getDateOfBirth);
 
         System.out.println("Date Of Birth: " + function.apply(individual));
     }
