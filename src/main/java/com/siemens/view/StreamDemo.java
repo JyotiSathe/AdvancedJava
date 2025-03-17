@@ -10,8 +10,8 @@ public class StreamDemo {
         List<Individual> individuals = ComparatorDemo.generateIndividuals();
 
         individuals.stream()
-                .map(Individual::getDateOfBirth)
-                .filter(dateOfBirth -> dateOfBirth.getYear() < 2000)
+                .filter(individual -> individual.getDateOfBirth().getYear() < 2000)
+                .map(Individual::getFullName)
                 .forEach(System.out::println);
     }
 }
