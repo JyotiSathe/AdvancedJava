@@ -64,7 +64,7 @@ public class BuiltInFunctionalInterfaceDemo {
             }
         };
 
-        consumer.accept(IndividualComparatorDemo.generateIndividuals());
+        consumer.accept(IndividualComparatorDemo.generateIndividuals().subList(0, 10));
 
     }
 }
