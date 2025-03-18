@@ -1,4 +1,4 @@
-package com.siemens.view;
+package com.siemens.view.java8.functionalinterface;
 
 import com.github.javafaker.Faker;
 import com.siemens.facade.DataGenerator;
@@ -10,8 +10,8 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.function.*;
 
-import static com.siemens.view.ComparatorDemo.generateAddresses;
-import static com.siemens.view.ComparatorDemo.generateRandomGender;
+import static com.siemens.view.java8.functionalinterface.ComparatorDemo.generateAddresses;
+import static com.siemens.view.java8.functionalinterface.ComparatorDemo.generateRandomGender;
 
 public class BuiltInFunctionalInterfaceDemo {
 

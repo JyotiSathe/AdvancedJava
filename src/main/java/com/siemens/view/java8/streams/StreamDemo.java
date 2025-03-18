@@ -1,8 +1,9 @@
-package com.siemens.view;
+package com.siemens.view.java8.streams;
 
 import com.github.javafaker.Faker;
 import com.siemens.dto.IndividualDTO;
 import com.siemens.model.*;
+import com.siemens.view.java8.functionalinterface.ComparatorDemo;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
