@@ -5,6 +5,7 @@ import com.siemens.dto.IndividualDTO;
 import com.siemens.model.*;
 import com.siemens.view.java8.functionalinterface.ComparatorDemo;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -107,19 +108,26 @@ public class StreamDemo {
 
         // aggregation
         System.out.println();
-        Optional<Long> maxValue =
+        Optional<BigDecimal> maxValue =
                 generateSavingsAccounts().stream()
                         .map(Account::getRunningTotals)
-                        .max(Long::compareTo);
+                        .max(BigDecimal::compareTo);
 
         maxValue.ifPresent(System.out::println);
 
+        List<SavingsAccount> savingsAccounts = generateSavingsAccounts();
         System.out.println();
-        Long sumValue = generateSavingsAccounts().stream()
+        BigDecimal sumValue = savingsAccounts.stream()
                 .map(Account::getRunningTotals)
-                .reduce(0L, Long::sum);
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         System.out.println("Opening total sum: " + sumValue);
+
+        System.out.println();
+        AccountAggregator accountAggregator = savingsAccounts.stream()
+                .collect(new AccountCustomCollector());
+
+        System.out.println(accountAggregator.getTotalCost());
     }
 
     public static List<Developer> getDevelopers() {
@@ -157,8 +165,7 @@ public class StreamDemo {
         SavingsAccount savingsAccount;
         for (int i = 0; i < 100; i++) {
             savingsAccount = new SavingsAccount();
-            savingsAccount.setRunningTotals(faker.number()
-                    .numberBetween(5000L, 100000000L));
+            savingsAccount.setRunningTotals(BigDecimal.valueOf(faker.number().numberBetween(5000L, 100000000L)));
             savingsAccount.setOpenDate(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             savingsAccount.setInterestRate(faker.number().numberBetween(1, 100));
 
