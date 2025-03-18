@@ -50,7 +50,7 @@ public class ComparatorDemo {
         return individuals;
     }
 
-    static List<Address> generateAddresses() {
+    public static List<Address> generateAddresses() {
         List<Address> addresses = new ArrayList<>();
         Faker faker = new Faker();
         for (int i = 0; i < 2; i++) {
