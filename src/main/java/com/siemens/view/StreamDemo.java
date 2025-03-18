@@ -5,6 +5,7 @@ import com.siemens.dto.IndividualDTO;
 import com.siemens.model.*;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -73,7 +74,7 @@ public class StreamDemo {
                 .filter(i -> i.getDateOfBirth().getYear() == 1994)
                 .findAny();
 //                .orElseThrow(() -> new RuntimeException("No Records for findAny."));
-//        System.out.println(object);
+        object.ifPresent(System.out::println);
 
         System.out.println();
         // limit
@@ -102,6 +103,22 @@ public class StreamDemo {
                 .toList();
 
         skills.forEach(System.out::println);
+
+        // aggregation
+        System.out.println();
+        Optional<Long> maxValue =
+                generateSavingsAccounts().stream()
+                        .map(Account::getRunningTotals)
+                        .max(Long::compareTo);
+
+        maxValue.ifPresent(System.out::println);
+
+        System.out.println();
+        Long sumValue = generateSavingsAccounts().stream()
+                .map(Account::getRunningTotals)
+                .reduce(0L, Long::sum);
+
+        System.out.println("Opening total sum: " + sumValue);
     }
 
     public static List<Developer> getDevelopers() {
@@ -130,5 +147,22 @@ public class StreamDemo {
     public static Skill generateRandomSkills() {
         Skill[] values = Skill.values();
         return values[(int) (Math.random() * values.length)];
+    }
+
+    public static List<SavingsAccount> generateSavingsAccounts() {
+
+        List<SavingsAccount> savingsAccountList = new ArrayList<>();
+        Faker faker = new Faker();
+        SavingsAccount savingsAccount;
+        for (int i = 0; i < 100; i++) {
+            savingsAccount = new SavingsAccount();
+            savingsAccount.setRunningTotals(faker.number()
+                    .numberBetween(5000L, 100000000L));
+            savingsAccount.setOpenDate(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            savingsAccount.setInterestRate(faker.number().numberBetween(1, 100));
+
+            savingsAccountList.add(savingsAccount);
+        }
+        return savingsAccountList;
     }
 }
