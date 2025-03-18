@@ -1,4 +1,4 @@
-package com.siemens.view.java9to21;
+package com.siemens.view.java9to21.java10;
 
 import com.github.javafaker.Faker;
 import com.siemens.model.Customer;
@@ -21,7 +21,7 @@ public class ImmutableCollectionDemo {
          * Exception in thread "main" java.lang.UnsupportedOperationException
          * 	at java.base/java.util.ImmutableCollections.uoe(ImmutableCollections.java:142)
          * 	at java.base/java.util.ImmutableCollections$AbstractImmutableCollection.add(ImmutableCollections.java:147)
-         * 	at com.siemens.view.java9to21.ImmutableCollectionDemo.main(ImmutableCollectionDemo.java:12)
+         * 	at com.siemens.view.java9to21.java10.ImmutableCollectionDemo.main(ImmutableCollectionDemo.java:12)
          */
 
         Map<String, String> map = Map.copyOf(getMap());

@@ -1,4 +1,4 @@
-package com.siemens.view.java9to21;
+package com.siemens.view.java9to21.java21;
 
 import com.siemens.model.Individual;
 

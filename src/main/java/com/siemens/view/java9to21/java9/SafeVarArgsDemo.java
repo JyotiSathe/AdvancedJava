@@ -1,4 +1,4 @@
-package com.siemens.view.java9to21;
+package com.siemens.view.java9to21.java9;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +26,8 @@ public class SafeVarArgsDemo {
         System.out.println(firstElement);
     }
 
+    // java 9
+    @SafeVarargs
     private static <T> void showSkillSets(T... skills) {
         Arrays.stream(skills).toList().forEach(System.out::println);
     }
