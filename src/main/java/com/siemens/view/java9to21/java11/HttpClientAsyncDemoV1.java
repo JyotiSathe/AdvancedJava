@@ -34,9 +34,7 @@ public class HttpClientAsyncDemoV1 {
                             List<UserDTO> userDTOS = mapper.readValue(responseBody, new TypeReference<>() {
                             });
                             if (userDTOS != null && !userDTOS.isEmpty()) {
-                                for (UserDTO user : userDTOS) {
-                                    System.out.println(user.getName() + " " + user.getUsername());
-                                }
+                                userDTOS.forEach(user -> System.out.println(user.getName() + " " + user.getUsername()));
                             }
                         } catch (JsonProcessingException e) {
                             throw new RuntimeException(e);
